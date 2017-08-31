@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.platformer.mariobros.MarioBros;
 import com.platformer.mariobros.scenes.Hud;
 import com.platformer.mariobros.sprites.Mario;
+import com.platformer.mariobros.tools.B2WorldCreator;
 
 /**
  * Created by Gabriel on 26/08/2017.
@@ -57,22 +58,7 @@ public class PlayScreen implements Screen{
         b2dr = new Box2DDebugRenderer();
         player = new Mario(world);
 
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
-        for(int i = 2; i<6; i++){
-            for (MapObject object : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-                bdef.type = BodyDef.BodyType.StaticBody;
-                bdef.position.set((rect.getX() + rect.getWidth() / 2) / MarioBros.PPM , (rect.getY() + rect.getHeight() / 2) / MarioBros.PPM);
-                body = world.createBody(bdef);
-                shape.setAsBox((rect.getWidth() / 2)/ MarioBros.PPM, (rect.getHeight() / 2)/ MarioBros.PPM);
-                fdef.shape = shape;
-                body.createFixture(fdef);
-            }
-        }
+        new B2WorldCreator(world, map);
     }
 
     @Override
@@ -137,6 +123,10 @@ public class PlayScreen implements Screen{
 
     @Override
     public void dispose() {
-
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        b2dr.dispose();
+        hud.dispose();
     }
 }

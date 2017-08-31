@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.platformer.mariobros.MarioBros;
@@ -15,7 +16,7 @@ import com.platformer.mariobros.MarioBros;
  * Created by Gabriel on 26/08/2017.
  */
 
-public class Hud {
+public class Hud implements Disposable{
     public static final String TIME_LABEL = "TIME";
     public static final String LEVEL_LABEL = "1-1";
     public static final String WORLD_LABEL = "WORLD";
@@ -62,5 +63,10 @@ public class Hud {
         table.add(countdownLabel).expandX();
 
         stage.addActor(table);
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
 }
