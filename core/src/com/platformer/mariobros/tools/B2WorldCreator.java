@@ -24,9 +24,9 @@ public class B2WorldCreator {
             for (MapObject object : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-                if(i == 5){
+                if(i == 4){
                     new Coin(world, map, rect);
-                }else if(i==4){
+                }else if(i==5){
                     new Brick(world, map, rect);
                 }else{
 
