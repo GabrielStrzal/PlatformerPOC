@@ -25,6 +25,7 @@ import com.platformer.mariobros.MarioBros;
 import com.platformer.mariobros.scenes.Hud;
 import com.platformer.mariobros.sprites.Mario;
 import com.platformer.mariobros.tools.B2WorldCreator;
+import com.platformer.mariobros.tools.WorldContactListener;
 
 /**
  * Created by Gabriel on 26/08/2017.
@@ -62,6 +63,7 @@ public class PlayScreen implements Screen{
         player = new Mario(world, this);
 
         new B2WorldCreator(world, map);
+        world.setContactListener(new WorldContactListener());
     }
     public TextureAtlas getAtlas(){
         return atlas;
